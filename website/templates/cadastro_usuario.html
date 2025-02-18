@@ -1,0 +1,21 @@
+
+{% extends 'layout.html' %}
+{% block content %}
+<div class="title">
+    cadastro de usuario
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-input">
+        Nome <br>
+        {{ form.nome }}
+    </div>
+    <div class="form-input">
+        Email <br>
+        {{ form.email }}
+    </div>
+    <div class="form-button">
+        <button type="submit">cadast</button>
+    </div>
+</form>
+{% endblock %}
