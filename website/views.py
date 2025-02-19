@@ -24,7 +24,6 @@ class CadastroTarefa(CreateView):
 class GerenciarTarefas(ListView):
     template_name = "gerenciar_tarefa.html"
     model = Tarefa
-    form_class = forms.CadastroTarefaForm
     context_object_name = "tarefas"
 
     

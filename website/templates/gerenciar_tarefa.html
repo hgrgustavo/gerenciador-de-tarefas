@@ -2,8 +2,9 @@
 
 {%block content %}
 <div class="list">
-    <h2>a fazer</h2>
     <div class="box">
+        <h2>a fazer</h2>
+
         {% for t in tarefas %}
         {% if t.status == "a fazer" %}
         <b>Descrição: </b> <i>{{ t.descricao }}</i>
@@ -16,10 +17,10 @@
     </div>
     {% endif %}
     {% endfor %}
-</div>
-<div class="list">
-    <h2>fazendo</h2>
+
     <div class="box">
+        <h2>fazendo</h2>
+
         {% for t in tarefas %}
         {% if t.status == "fazendo" %}
         <b>Descrição: </b> <i>{{ t.descricao }}</i>
@@ -32,10 +33,10 @@
     </div>
     {% endif %}
     {% endfor %}
-</div>
-<div class="list">
-    <h2>pronto</h2>
+
     <div class="box">
+        <h2>pronto</h2>
+
         {% for t in tarefas %}
         {% if t.status == "pronto" %}
         <b>Descrição: </b> <i>{{ t.descricao }}</i>

@@ -1,5 +1,16 @@
-
 from django.db import models
+
+
+
+class Usuario(models.Model):
+    nome = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'usuario'
+          
+    def __str__(self):
+        return self.nome
 
 
 class Tarefa(models.Model):
@@ -14,6 +25,7 @@ class Tarefa(models.Model):
         ("fazendo", "Fazendo"), 
         ("pronto", "Pronto"),
     ]
+    
     usuario = models.ForeignKey('Usuario', models.DO_NOTHING)
     descricao = models.CharField(max_length=255)
     setor = models.CharField(max_length=255)
@@ -22,14 +34,4 @@ class Tarefa(models.Model):
     status = models.CharField(max_length=7, choices=STATUS_CHOICES, default="a fazer")
 
     class Meta:
-        managed = False
         db_table = 'tarefa'
-
-
-class Usuario(models.Model):
-    nome = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'usuario'

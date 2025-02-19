@@ -15,7 +15,6 @@ body {
     color: white;
     padding: 14px 16px;
 
-
 }
 
 .links {
@@ -63,3 +62,20 @@ body {
     border: 0;
     
 }
+
+.list {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    align-self: stretch;
+    gap: 8rem;
+    padding-top: 2%;
+
+}
+
+.box {
+    background: whitesmoke;
+    padding: 2%;
+    border-radius: 0.6rem;
+}
+
