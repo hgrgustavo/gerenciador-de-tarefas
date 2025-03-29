@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  {% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Home{% endblock %}</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="{% static 'js/scripts.js' %}"></script>
+</head>
+<body class="m-0">
+  <div class="" style="background: #0056b3">
+    <nav class="flex justify-between text-white">
+      <span class="font-bold m-4">Gerenciador de tarefas</span>
+
+      <ul class="flex justify-end gap-6 m-4 -translate-x-4">
+        <li class="">
+            <a class="" href="{% url 'createusuariopage' %}">Cadastro de Usuários</a>
+        </li>
+        <li class="">
+            <a class="" href="{% url 'createtarefapage' %}">Cadastro de Tarefas</a>
+        </li>
+        <li class="">
+          <a class="" href="#">Gerenciar Tarefas</a> 
+        </ul>
+    </nav>
+  </div>
+  <span class="font-bold flex justify-center my-5">{% block subtitle %}Homepage{% endblock %}</span>
+  {% block content %}
+  {% endblock %}
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+
+</html>

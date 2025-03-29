@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Cadastro{% endblock %}
+{% block subtitle %}Cadastro de Tarefas{% endblock %}
+{% block content %}
+<form id="form__createtask" method="post">
+  {%csrf_token %}
+  <div class="mt-10 grid place-items-center grid-cols-2">
+    <div class="sm:col-span-2 mt-5">
+      <label class="block text-sm/6 font-medium text-gray-900">Descrição</label>
+      <div class="mt-1">
+        {{ form.descricao }}
+      </div>
+    </div>
+
+    <div class="sm:col-span-2 mt-5">
+      <label class="block text-sm/6 font-medium text-gray-900">Setor</label>
+      <div class="mt-1">
+        {{ form.setor }}
+      </div>
+    </div>
+
+    <div class="mt-2 sm:col-span-2 mt-5">
+      <label class="block text-sm/6 font-medium text-gray-900">Usuário</label>
+
+      {{ form.usuario }}
+
+    </div>
+
+    <div class="mt-2 sm:col-span-2 mt-5">
+      <label class="block text-sm/6 font-medium text-gray-900">Prioridade</label>
+
+      {{ form.prioridade }}
+
+
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-10">
+    <button style="background: #0056b3;"
+      class="flex m-1 shadow-blue-500 rounded-full py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <i data-lucide="save"></i>
+      <span class="self-center ml-1">Salvar</span>
+    </button>
+  </div>
+</form>
+{% endblock %}
