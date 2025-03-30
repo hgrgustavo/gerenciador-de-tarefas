@@ -1,8 +1,10 @@
 class Async {
   constructor() {
     this.updateTaskStatus();
+    this.deleteTask();
 
   }
+
 
   getCSRFToken() {
     const token = document.querySelector("[name=csrfmiddlewaretoken]") ||
@@ -11,33 +13,47 @@ class Async {
   }
 
 
-  deleteTask(urlId) {
-    if (confirm("Deseja excluir este item?")) {
-      fetch(`excluir/${urlId}/`, {
-        method: "DELETE",
-        headers: {
-          "X-CSRFToken": this.getCSRFToken(),
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === "success") {
-            const elementToDelete = document.getElementById(urlId);
-
-            if (elementToDelete) {
-              elementToDelete.remove();
-              alert("Tarefa deletada com sucesso!");
-            } else {
-              console.error("Elemento não encontrado no DOM!");
-            }
+  deleteTask() {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a.bg-red-600.rounded-md.p-2.flex.items-center.shadow-xs.shadow-red-600\\/50.hover\\:text-white").forEach((anchor) => {
+        anchor.addEventListener("click", (event) => {
+          const closestDiv = event.target.closest("div[id]");
+          if (!closestDiv) {
+            console.error("Div com ID não encontrada!");
+            return;
           }
-        })
-        .catch(error => {
-          alert("Ocorreu um erro ao tentar excluir a tarefa.");
-          console.error("Erro ao deletar: ", error);
+          const urlId = closestDiv.id;
+
+          if (confirm(`Deseja excluir a tarefa #${urlId}?`)) {
+            fetch(`excluir/${urlId}/`, {
+              method: "DELETE",
+              headers: {
+                "X-CSRFToken": this.getCSRFToken(),
+                "Content-Type": "application/json",
+              }
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.status === "success") {
+                  const taskContainer = document.getElementById(urlId);
+                  if (taskContainer) {
+                    taskContainer.parentNode.removeChild(taskContainer);
+                  } else {
+                    console.error("Elemento não encontrado no DOM!");
+                  }
+                } else {
+                  console.error("Erro no servidor ao excluir a tarefa.");
+                }
+              })
+              .catch(error => {
+                console.error("Erro ao excluir tarefa: " + error);
+              });
+          }
         });
-    }
+      });
+    });
   }
+
 
   updateTaskStatus() {
     document.addEventListener("DOMContentLoaded", () => {
@@ -82,7 +98,6 @@ class Async {
       });
     });
   }
-
 }
 
 const async = new Async();
