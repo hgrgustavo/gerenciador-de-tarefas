@@ -1,6 +1,7 @@
 from django.views.generic import edit, base, list
 from . import models, forms
 from django import http
+import json
 
 
 class Index(base.TemplateView):
@@ -28,16 +29,31 @@ class ListTarefa(list.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = forms.UpdateTarefaStatusForm
 
         return context
 
 
+# refazer view
+
+
 class UpdateTarefaStatus(edit.UpdateView):
-    template_name = "list_tarefa.html"
     model = models.Tarefa
-    form_class = forms.UpdateTarefaStatusForm
-    success_url = "#"
+
+    def post(self, request, **kwargs):
+        try:
+            new_status = json.loads(request.body).get("status")
+
+            if new_status not in [key for key, _ in models.Tarefa.CHOICES_STATUS]:
+                return http.JsonResponse({"success": False, "cause": "Invalid status"}, status=400)
+
+            task = self.get_object()
+            task.status = new_status
+            task.save()
+
+            return http.JsonResponse({"success": True})
+
+        except models.Tarefa.DoesNotExist:
+            return http.JsonResponse({"success": False, "cause": "Item not found"}, status=404)
 
 
 class DeleteTarefa(edit.DeleteView):

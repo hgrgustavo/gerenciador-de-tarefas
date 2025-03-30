@@ -17,7 +17,7 @@ class Tarefa(models.Model):
 
     usuario = models.ForeignKey('Usuario', models.DO_NOTHING)
     descricao = models.TextField()
-    setor = models.CharField(unique=True, max_length=255)
+    setor = models.CharField(max_length=255)
     prioridade = models.CharField(max_length=5, choices=CHOICES_PRIORIDADE)
     data_cadastro = models.DateField()
     status = models.CharField(
