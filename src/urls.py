@@ -21,8 +21,10 @@ urlpatterns = [
                  name="listtarefapage"),
 
              path("tarefas/atualizar-status/<int:pk>/",
-                  views.UpdateTarefaStatus.as_view(), name="atualizarstatuspage")
+                  views.UpdateTarefaStatus.as_view(), name="updatestatuspage"),
+
+             path("tarefas/excluir/<int:pk>/",
+                  views.DeleteTarefa.as_view(), name="deletetarefapage"),
          ])
          ),
-
 ]

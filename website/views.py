@@ -1,5 +1,6 @@
 from django.views.generic import edit, base, list
 from . import models, forms
+from django import http
 
 
 class Index(base.TemplateView):
@@ -37,3 +38,16 @@ class UpdateTarefaStatus(edit.UpdateView):
     model = models.Tarefa
     form_class = forms.UpdateTarefaStatusForm
     success_url = "#"
+
+
+class DeleteTarefa(edit.DeleteView):
+    model = models.Tarefa
+
+    def delete(self, request, **kwargs):
+        try:
+            self.get_object().delete()
+
+            return http.JsonResponse({"status": "success"})
+
+        except models.Tarefa.DoesNotExist:
+            return http.JsonResponse({"status": "error", "cause": "Item not found"})

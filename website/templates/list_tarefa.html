@@ -3,20 +3,20 @@
 {% block subtitle %}Gerenciar tarefas{% endblock %}
 {% block content %}
 
-<div class="grid grid-cols-6 gap-20 place-items-stretch">
+<div class="grid grid-cols-6 gap-20 place-items-stretch shrink-1">
   <div class="col-span-2">
     <span class="flex justify-center font-bold text-xl">A fazer</span>  
     {% for t in tasks %}
     {% if t.status == "a fazer" %}
-    <div class="shadow-xl rounded-md ml-3 py-5">
+    <div id="{{ t.id }}" class="shadow-xl rounded-md ml-3 py-5">
       <span class="m-2"><strong class="m-1">Descrição:</strong> {{ t.descricao }}<br></span>
       <span class="m-2"><strong class="m-1">Setor</strong>: {{ t.setor }}<br></span>
       <span class="m-2"><strong class="m-1">Prioridade:</strong> {{ t.prioridade }}<br></span>
       <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span>
-      <div class="flex gap-5 items-end ml-3 mt-3">
+      <div class="flex items-end ml-3 mt-3 justify-evenly -translate-x-2">
         <a href="#" class="bg-green-600 rounded-md p-2 flex items-center shadow-xs shadow-green-600/50 hover:text-white" ><i class="mr-1" data-lucide="settings"></i>Editar</a>
-        <a href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
-        <form class="flex-col mt-2" method="post" action="{% url 'atualizarstatuspage' t.id %}">
+        <a id="delete-anchor" href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
+        <form class="flex-col mt-2" method="post" action="{% url 'updatestatuspage' t.id %}">
           {% csrf_token %}
           {{ form.status }}
           <button class="mt-2 bg-blue-600 rounded-md p-2 flex items-center shadow-xs shadow-blue-600/50 hover:text-white" type="submit"><i class="mr-1" data-lucide="funnel"></i>Alterar status</button>
@@ -27,25 +27,43 @@
   {% endif %}
  
   <div class="col-span-2">
-    <span class="flex justify-center font-bold text-xl">Fazendo</span>   
+    <span class="flex justify-center font-bold text-xl">Fazendo</span>  
     {% if t.status == "fazendo" %}
-    <div class="shadow-xl rounded-md m-1 py-5">
+    <div class="shadow-xl rounded-md mx-3 py-5">
       <span class="m-2"><strong class="m-1">Descrição:</strong> {{ t.descricao }}<br></span>
       <span class="m-2"><strong class="m-1">Setor</strong>: {{ t.setor }}<br></span>
       <span class="m-2"><strong class="m-1">Prioridade:</strong> {{ t.prioridade }}<br></span>
-      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span> 
+      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span>
+      <div class="flex items-end ml-3 mt-3 justify-evenly -translate-x-2">
+        <a href="#" class="bg-green-600 rounded-md p-2 flex items-center shadow-xs shadow-green-600/50 hover:text-white" ><i class="mr-1" data-lucide="settings"></i>Editar</a>
+        <a href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
+        <form class="flex-col mt-2" method="post" action="{% url 'updatestatuspage' t.id %}">
+          {% csrf_token %}
+          {{ form.status }}
+          <button class="mt-2 bg-blue-600 rounded-md p-2 flex items-center shadow-xs shadow-blue-600/50 hover:text-white" type="submit"><i class="mr-1" data-lucide="funnel"></i>Alterar status</button>
+        </form>
+      </div>
     </div>
   </div>
   {% endif %}
-
+ 
   <div class="col-span-2">
-    <span class="flex justify-center font-bold text-xl">Pronto</span>  
+    <span class="flex justify-center font-bold text-xl">Pronto</span>   
     {% if t.status == "pronto" %}
-    <div class="shadow-xl rounded-md m-1 py-5">
+    <div class="shadow-xl rounded-md mr-3 py-5">
       <span class="m-2"><strong class="m-1">Descrição:</strong> {{ t.descricao }}<br></span>
       <span class="m-2"><strong class="m-1">Setor</strong>: {{ t.setor }}<br></span>
       <span class="m-2"><strong class="m-1">Prioridade:</strong> {{ t.prioridade }}<br></span>
-      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span> 
+      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span>
+      <div class="flex items-end ml-3 mt-3 justify-evenly -translate-x-2">
+        <a href="#" class="bg-green-600 rounded-md p-2 flex items-center shadow-xs shadow-green-600/50 hover:text-white" ><i class="mr-1" data-lucide="settings"></i>Editar</a>
+        <a href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
+        <form class="flex-col mt-2" method="post" action="{% url 'updatestatuspage' t.id %}">
+          {% csrf_token %}
+          {{ form.status }}
+          <button class="mt-2 bg-blue-600 rounded-md p-2 flex items-center shadow-xs shadow-blue-600/50 hover:text-white" type="submit"><i class="mr-1" data-lucide="funnel"></i>Alterar status</button>
+        </form>
+      </div>
     </div>
   </div>
   {% endif %}
