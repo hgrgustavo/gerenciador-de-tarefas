@@ -33,9 +33,6 @@ class ListTarefa(list.ListView):
         return context
 
 
-# refazer view
-
-
 class UpdateTarefaStatus(edit.UpdateView):
     model = models.Tarefa
 
@@ -67,3 +64,16 @@ class DeleteTarefa(edit.DeleteView):
 
         except models.Tarefa.DoesNotExist:
             return http.JsonResponse({"status": "error", "cause": "Item not found"})
+
+
+class UpdateTarefa(edit.UpdateView):
+    model = models.Tarefa
+    template_name = "update_tarefa.html"
+    form_class = forms.UpdateTarefa
+    success_url = "updatetarefapage"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["task_pk"] = self.get_object().id
+
+        return context

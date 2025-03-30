@@ -20,11 +20,14 @@ urlpatterns = [
              path("tarefas/", views.ListTarefa.as_view(),
                  name="listtarefapage"),
 
+             path("tarefas/editar-tarefa/<int:pk>/",
+                  views.UpdateTarefa.as_view(), name="updatetarefapage"),
+
              path("tarefas/atualizar-status/<int:pk>/",
                   views.UpdateTarefaStatus.as_view(), name="updatestatuspage"),
 
              path("tarefas/excluir/<int:pk>/",
                   views.DeleteTarefa.as_view(), name="deletetarefapage"),
-         ])
-         ),
+         ]),
+         name="gerenciartarefapage"),
 ]
