@@ -4,5 +4,25 @@ from website import views
 
 urlpatterns = [
     # path("admin/", admin.site.urls),
-    path("", views.CreateUsuario.as_view(), name="createusuariopage"),
+    path("", views.Index.as_view(), name="indexpage"),
+    path(
+        "cadastro/",
+        include([
+            path("usuario/", views.CreateUsuario.as_view(),
+                 name="createusuariopage"),
+            path("tarefa/", views.CreateTarefa.as_view(),
+                 name="createtarefapage"),
+
+        ])
+    ),
+    path("gerenciar/",
+         include([
+             path("tarefas/", views.ListTarefa.as_view(),
+                 name="listtarefapage"),
+
+             path("tarefas/atualizar-status/<int:pk>/",
+                  views.UpdateTarefaStatus.as_view(), name="atualizarstatuspage")
+         ])
+         ),
+
 ]

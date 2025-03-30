@@ -20,7 +20,8 @@ class Tarefa(models.Model):
     setor = models.CharField(unique=True, max_length=255)
     prioridade = models.CharField(max_length=5, choices=CHOICES_PRIORIDADE)
     data_cadastro = models.DateField()
-    status = models.CharField(max_length=7, choices=CHOICES_STATUS, default="a fazer")
+    status = models.CharField(
+        max_length=7, choices=CHOICES_STATUS, default="a fazer")
 
     class Meta:
         db_table = 'tarefa'
@@ -30,6 +31,9 @@ class Tarefa(models.Model):
 class Usuario(models.Model):
     nome = models.CharField(max_length=255)
     email = models.CharField(unique=True, max_length=255)
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         db_table = 'usuario'
