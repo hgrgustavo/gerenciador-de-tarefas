@@ -2,6 +2,7 @@ from django.views.generic import edit, base, list
 from . import models, forms
 from django import http
 import json
+from django.urls import reverse_lazy
 
 
 class Index(base.TemplateView):
