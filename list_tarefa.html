@@ -1,0 +1,85 @@
+{% extends "index.html" %}
+{% block title %}Gerenciador{% endblock %}
+{% block subtitle %}Gerenciar tarefas{% endblock %}
+{% block content %}
+
+<div class="grid grid-cols-3 gap-4">
+  <div id="coluna-a fazer">
+    <span class="flex justify-center font-bold text-xl">A fazer</span>  
+    {% for t in tasks %}
+    {% if t.status == "a fazer" %}
+    <div id="{{ t.id }}" class="shadow-xl rounded-md ml-3 py-5">
+      <span class="m-2"><strong class="m-1">Descrição:</strong> {{ t.descricao }}<br></span>
+      <span class="m-2"><strong class="m-1">Setor</strong>: {{ t.setor }}<br></span>
+      <span class="m-2"><strong class="m-1">Prioridade:</strong> {{ t.prioridade }}<br></span>
+      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span>
+      <div class="flex items-end justify-center -translate-x-2 gap-3 mt-3">
+        <a href="{% url 'updatetarefapage' t.id %}" class="bg-green-600 rounded-md p-2 flex items-center shadow-xs shadow-green-600/50 hover:text-white" ><i class="mr-1" data-lucide="settings"></i>Editar</a>
+        <a href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
+        <div class="flex-col align-center">
+          <select class="ring rounded-md self-baseline p-1 pr-15">
+            <option class="text-center" value="a fazer">a fazer</option>
+            <option class="text-center" value="fazendo">fazendo</option>
+            <option class="text-center" value="pronto">pronto</option>
+          </select>
+          <button class="mt-2 bg-blue-600 rounded-md p-2 flex items-center shadow-xs shadow-blue-600/50 hover:text-white" type="submit"><i class="mr-1" data-lucide="funnel"></i>Alterar status</button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}
+  </div>
+
+  <div id="coluna-fazendo">
+    <span class="flex justify-center font-bold text-xl">Fazendo</span>
+    {% for t in tasks %}
+    {% if t.status == "fazendo" %}
+    <div id="{{ t.id }}" class="shadow-xl rounded-md ml-3 py-5">
+      <span class="m-2"><strong class="m-1">Descrição:</strong> {{ t.descricao }}<br></span>
+      <span class="m-2"><strong class="m-1">Setor</strong>: {{ t.setor }}<br></span>
+      <span class="m-2"><strong class="m-1">Prioridade:</strong> {{ t.prioridade }}<br></span>
+      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span>
+      <div class="flex items-end justify-center -translate-x-2 gap-3 mt-3">
+        <a href="{% url 'updatetarefapage' t.id %}" class="bg-green-600 rounded-md p-2 flex items-center shadow-xs shadow-green-600/50 hover:text-white" ><i class="mr-1" data-lucide="settings"></i>Editar</a>
+        <a href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
+        <div class="flex-col align-center">
+          <select class="ring rounded-md self-baseline p-1 pr-15">
+            <option class="text-center" value="a fazer">a fazer</optin>
+            <option class="text-center" value="fazendo">fazendo</option>
+            <option class="text-center" value="pronto">pronto</option>
+          </select>
+          <button class="mt-2 bg-blue-600 rounded-md p-2 flex items-center shadow-xs shadow-blue-600/50 hover:text-white" type="submit"><i class="mr-1" data-lucide="funnel"></i>Alterar status</button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}
+  </div>
+
+  <div id="coluna-pronto">
+    <span class="flex justify-center font-bold text-xl">Pronto</span> 
+    {% for t in tasks %}
+    {% if t.status == "pronto" %}
+    <div id="{{ t.id }}" class="shadow-xl rounded-md ml-3 py-5">
+      <span class="m-2"><strong class="m-1">Descrição:</strong> {{ t.descricao }}<br></span>
+      <span class="m-2"><strong class="m-1">Setor</strong>: {{ t.setor }}<br></span>
+      <span class="m-2"><strong class="m-1">Prioridade:</strong> {{ t.prioridade }}<br></span>
+      <span class="m-2"><strong class="m-1">Vinculado à:</strong> {{ t.usuario }}<br></span>
+      <div class="flex items-end justify-center -translate-x-2 gap-3 mt-3">
+        <a href="{% url 'updatetarefapage' t.id %}" class="bg-green-600 rounded-md p-2 flex items-center shadow-xs shadow-green-600/50 hover:text-white" ><i class="mr-1" data-lucide="settings"></i>Editar</a>
+        <a href="#" class="bg-red-600 rounded-md p-2 flex items-center shadow-xs shadow-red-600/50 hover:text-white"><i class="mr-1" data-lucide="trash-2"></i>Excluir</a> 
+        <div class="flex-col align-center">
+          <select class="ring rounded-md self-baseline p-1 pr-15">
+            <option class="text-center" value="a fazer">a fazer</option>
+            <option class="text-center" value="fazendo">fazendo</option>
+            <option class="text-center" value="pronto">pronto</option>
+          </select>
+          <button class="mt-2 bg-blue-600 rounded-md p-2 flex items-center shadow-xs shadow-blue-600/50 hover:text-white" type="submit"><i class="mr-1" data-lucide="funnel"></i>Alterar status</button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}
